@@ -17,7 +17,7 @@ def import_json_to_list(json_file_path):
 
 def extract_title(url_page : str):
     try:
-        response = urllib.request.urlopen(url_page)
+        response = urllib.request.urlopen(url_page, timeout=1.0).read().decode('utf-8')
         page = BeautifulSoup(response)
         title = page.title.get_text()
     except Exception as e:
@@ -52,4 +52,10 @@ def create_stats(list_token):
     number_of_docs = len(list_token)
     number_of_tokens = sum(len(l) for l in list_token)
     mean_per_doc = mean([len(l) for l in list_token])
-    return dict([(i, locals()[i]) for i in ('number_of_docs', 'number_of_tokens', 'mean_per_doc')])
+    my_dict = {'number_of_docs' : number_of_docs, 'number_of_tokens' : number_of_tokens, 'mean_per_doc' : mean_per_doc}
+    return my_dict
+
+def export_dict(dict: dict, file_name : str):
+    data_json = json.dumps(dict, indent=3)
+    with open(file_name, "w", encoding='utf8') as f1:
+        f1.write(data_json)
