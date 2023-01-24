@@ -60,3 +60,13 @@ def export_dict(dict: dict, file_name : str):
     data_json = json.dumps(dict, indent=3)
     with open(file_name, "w", encoding='utf8') as f1:
         f1.write(data_json)
+
+def create_inverted_index_with_pos(list_token):
+    index = defaultdict(list)
+    for i, tokens in enumerate(list_token):
+        for token in tokens:
+            indices = [i for i, x in enumerate(tokens) if x == token]
+            index[token].append(f"{i}:{indices}")
+    for k,v in index.items():
+        index[k] = [*set(v)]
+    return index
