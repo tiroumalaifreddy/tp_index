@@ -18,10 +18,11 @@ def import_json_to_list(json_file_path):
 def extract_title(url_page : str):
     try:
         response = urllib.request.urlopen(url_page, timeout=1.0).read().decode('utf-8')
-        page = BeautifulSoup(response)
+        page = BeautifulSoup(response, 'html.parser')
         title = page.title.get_text()
     except Exception as e:
         title = ''
+    print(url_page)
     return title
 
 def tokenize(string):
