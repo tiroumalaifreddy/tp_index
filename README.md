@@ -29,7 +29,7 @@ L'application prend en entrée:
 En se plaçant à la racine du projet et en ayant le fichier des URLs à la racine (```crawled_urls.json```) :
 
 ```python
-python3.8 main.py ---json_file crawled_urls.json
+python3.8 main.py --json_file crawled_urls.json
 ```
 
 Deux fichiers .txt seront alors crées dà la racine:
